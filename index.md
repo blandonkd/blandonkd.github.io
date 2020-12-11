@@ -3,9 +3,14 @@
 This page is an amalgamation of my work throughout my coursework at Southern New Hampshire University.
 
 ### My Weather Station Project
+
+This project is written in Python, stores information by use of a JSON-based database, and outputs a visual representation to a web browser by way of an HTML script. The project
+is not overly complicated, but it doesn't have to be since complication does not correlate to understanding. For a full code review of this project, please head on over to my YouTube page where I break down this project and its functionality and some explanation of improvements I made on the road to get to this final, polished version. 
+
+https://www.youtube.com/watch?v=3PjhI__jI1g&feature=youtu.be&ab_channel=KeiferBlandon
+
 #### The Source File
-I have below the source code for the weather station that I built using a Raspberry Pi 3, a GrovePi hat, along with various sensors, and all written in Python. This project is
-written in Python, stores information by use of a JSON-based database, and outputs a visual representation to a web browser by way of an HTML script.The project is not complicated, but complication does not correlate to understanding.
+I have below the Python source code for the weather station that I built using a Raspberry Pi 3, a GrovePi hat, along with various sensors, and all written in Python. 
 
 ```python
 # Author:           Keifer Blandon
