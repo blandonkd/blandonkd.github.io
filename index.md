@@ -4,13 +4,12 @@ This page is an amalgamation of my work throughout my coursework at Southern New
 
 ### My Weather Station Project
 
-This project is written in Python, stores information by use of a JSON-based database, and outputs a visual representation to a web browser by way of an HTML script. The project
-is not overly complicated, but it doesn't have to be since complication does not correlate to understanding. For a full code review of this project, please head on over to my YouTube page where I break down this project and its functionality and some explanation of improvements I made on the road to get to this final, polished version. 
+This project is a very functional device that records the ambient temperature and humidity and, utilizing an LED light array, qualitatively indicates various conditions. Additionally, the device also collects this temperature and humidty data and is displayed in a web browser for quantitative data analysis. The project is written in Python for the main source file, stores information by use of a JSON-based database in a separate file for data collection, and outputs a visual representation to a web browser by way of an HTML script. The project is not overly complicated, but its functionality is really what I was aiming for. For a full code review of this project, please head on over to my YouTube page where I break down this project and its functionality and some explanation of improvements I made on the road to get to this final, polished version. 
 
 https://www.youtube.com/watch?v=3PjhI__jI1g&feature=youtu.be&ab_channel=KeiferBlandon
 
 #### The Source File
-I have below the Python source code for the weather station that I built using a Raspberry Pi 3, a GrovePi hat, along with various sensors, and all written in Python. 
+I have below the Python source code for the weather station that I built using a Raspberry Pi 3, a GrovePi hat, along with various sensors, and all written in Python. The overall functionality of the program is that it utilizes one main loop with various nest loops that add additional functionality by way of interrupts or time delays. The device is designed only to collect data during light hours, so an interrupt was written in to effectively keep the device sleeping until the light sensor indicates daylight.
 
 ```python
 # Author:           Keifer Blandon
@@ -153,7 +152,7 @@ while True:
 ```
 
 #### The Database
-The program written for my RPi project incorporates data storage by way of outputting the collected environmental information to a file, structured in JSON. Below is an example of the output for the database.
+The program written for my RPi project incorporates data storage by way of outputting the collected environmental information to a file, structured in JSON. Below is an example of the output for the database. The data is collected in sets of 3. The first value is the time stamp which is simply a incremental counter. The only purpose for that is to be able to plot the data collected over time, rather than relative to the other data. The second value is the ambient temperature in Fahrenheit and the final value is the ambient humidity in percent.
 
 ```json
 [[0, 73.4, 48.0], [1, 73.4, 48.0], [2, 73.4, 48.0], [3, 73.4, 48.0], [4, 73.4, 52.0], [5, 73.4, 58.0], [6, 75.2, 57.0], [7, 75.2, 55.0], [8, 75.2, 54.0], [9, 75.2, 81.0], [10, 75.2, 75.0], [11, 75.2, 67.0], [12, 75.2, 64.0], [13, 75.2, 70.0], [14, 75.2, 95.0], [15, 75.2, 80.0], [16, 75.2, 72.0], [17, 75.2, 69.0], [18, 75.2, 66.0], [19, 75.2, 65.0], [20, 75.2, 63.0], [21, 75.2, 61.0]]
@@ -161,7 +160,7 @@ The program written for my RPi project incorporates data storage by way of outpu
 ```
 
 #### The Dashboard File
-The dashboard is an HTML file utilizing the CanvasJS API. This dashboard takes the outputted data that is collected in JSON and outputs it to a web browser showing two different graphs. The first graph is temperature over time and the second is humidity over time.
+The dashboard is an HTML file utilizing the CanvasJS API. This dashboard takes the outputted data that is collected in JSON and outputs it to a web browser showing two different graphs. The first graph is temperature over time and the second is humidity over time. For this layout I used a line chart and mapped the time-stamp value to the X axis and either temperature or humidy to the Y axis. 
 
 ```html
 <!DOCTYPE HTML>
