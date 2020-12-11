@@ -3,13 +3,13 @@
 This page is an amalgamation of my work throughout my coursework at Southern New Hampshire University.
 
 ### My Weather Station Project
-To showcase my work, I have below the source code for the weather station that I built using a Raspberry Pi 3, a GrovePi hat, along with various sensors, and all written in Python 3.
+#### The Source File
+I have below the source code for the weather station that I built using a Raspberry Pi 3, a GrovePi hat, along with various sensors, and all written in Python. This project is
+written in Python, stores information by use of a JSON-based database, and outputs a visual representation to a web browser by way of an HTML script.The project is not complicated, but complication does not correlate to understanding.
 
 ```python
 # Author:           Keifer Blandon
 # Institution:      Southern New Hampshire University
-# Last Updated:     29 Nov 2020
-# Class:            CS499 Computer Science Capstone
 
 import time
 import math
@@ -145,4 +145,81 @@ while True:
     # Print "Error" if communication error encountered
     except IOError:
         print ("Error")
+```
+
+#### The Database
+The program written for my RPi project incorporates data storage by way of outputting the collected environmental information to a file, structured in JSON. Below is an example of the output for the database.
+
+```json
+[[0, 73.4, 48.0], [1, 73.4, 48.0], [2, 73.4, 48.0], [3, 73.4, 48.0], [4, 73.4, 52.0], [5, 73.4, 58.0], [6, 75.2, 57.0], [7, 75.2, 55.0], [8, 75.2, 54.0], [9, 75.2, 81.0], [10, 75.2, 75.0], [11, 75.2, 67.0], [12, 75.2, 64.0], [13, 75.2, 70.0], [14, 75.2, 95.0], [15, 75.2, 80.0], [16, 75.2, 72.0], [17, 75.2, 69.0], [18, 75.2, 66.0], [19, 75.2, 65.0], [20, 75.2, 63.0], [21, 75.2, 61.0]]
+
+```
+
+#### The Dashboard File
+The dashboard is an HTML file utilizing the CanvasJS API. This dashboard takes the outputted data that is collected in JSON and outputs it to a web browser showing two different graphs. The first graph is temperature over time and the second is humidity over time.
+
+```html
+<!DOCTYPE HTML>
+<html>
+<head>
+<!--Imports for javascript-->
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+
+window.onload = function () {
+
+// Establish arrays for different data sets
+var tempDataPoints = [];
+var humDataPoints = [];
+
+// Parse time and temperature data from data file and set to array
+$.getJSON("outputData.json", function(data) {  
+	$.each(data, function(key, value){
+		tempDataPoints.push({x: value[0], y: parseInt(value[1])});
+	});
+	// Use CanvasJS API
+	var chart = new CanvasJS.Chart("chartContainer1",{
+		title:{
+			text:"Plotting Temperature Over Time"
+		},
+		// Draw line chart with temperature data array
+		data: [{
+			type: "line",
+			dataPoints : tempDataPoints,
+		}]
+	});
+	chart.render();
+});
+
+// Parse time and humidity data from data file and set to array
+$.getJSON("outputData.json", function(data) {  
+	$.each(data, function(key, value){
+		humDataPoints.push({x: value[0], y: parseInt(value[2])});
+	});
+	// Use CanvasJS API
+	var chart = new CanvasJS.Chart("chartContainer2",{
+		title:{
+			text:"Plotting Humidity Over Time"
+		},
+		// Draw line chart with humidity data array
+		data: [{
+			type: "line",
+			dataPoints : humDataPoints,
+		}]
+	});
+	chart.render();
+});
+}
+</script>
+
+</head>
+<body>
+<!-- Div container for temp chart -->
+<div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+<!-- div container for humidy chart -->
+<div id="chartContainer2" style="height: 300px; width: 100%;"></div>
+</body>
+</html>
+
 ```
