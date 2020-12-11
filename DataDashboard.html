@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!--Imports for javascript-->
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+
+window.onload = function () {
+
+// Establish arrays for different data sets
+var tempDataPoints = [];
+var humDataPoints = [];
+
+// Parse time and temperature data from data file and set to array
+$.getJSON("outputData.json", function(data) {  
+	$.each(data, function(key, value){
+		tempDataPoints.push({x: value[0], y: parseInt(value[1])});
+	});
+	// Use CanvasJS API
+	var chart = new CanvasJS.Chart("chartContainer1",{
+		title:{
+			text:"Plotting Temperature Over Time"
+		},
+		// Draw line chart with temperature data array
+		data: [{
+			type: "line",
+			dataPoints : tempDataPoints,
+		}]
+	});
+	chart.render();
+});
+
+// Parse time and humidity data from data file and set to array
+$.getJSON("outputData.json", function(data) {  
+	$.each(data, function(key, value){
+		humDataPoints.push({x: value[0], y: parseInt(value[2])});
+	});
+	// Use CanvasJS API
+	var chart = new CanvasJS.Chart("chartContainer2",{
+		title:{
+			text:"Plotting Humidity Over Time"
+		},
+		// Draw line chart with humidity data array
+		data: [{
+			type: "line",
+			dataPoints : humDataPoints,
+		}]
+	});
+	chart.render();
+});
+}
+</script>
+
+</head>
+<body>
+<!-- Div container for temp chart -->
+<div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+<!-- div container for humidy chart -->
+<div id="chartContainer2" style="height: 300px; width: 100%;"></div>
+</body>
+</html>
