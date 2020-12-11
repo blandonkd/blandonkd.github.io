@@ -5,9 +5,6 @@ This page is an amalgamation of my work throughout my coursework at Southern New
 ### My Weather Station Project
 To showcase my work, I have below the source code for the weather station that I built using a Raspberry Pi 3, a GrovePi hat, along with various sensors, and all written in Python 3.
 
-```markdown
-Syntax highlighted code block
-
 ```python
 # Author:           Keifer Blandon
 # Institution:      Southern New Hampshire University
