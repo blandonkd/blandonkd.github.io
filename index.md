@@ -160,7 +160,7 @@ The program written for my RPi project incorporates data storage by way of outpu
 ```
 
 #### The Dashboard File
-The dashboard is an HTML file utilizing the CanvasJS API. This dashboard takes the outputted data that is collected in JSON and outputs it to a web browser showing two different graphs. The first graph is temperature over time and the second is humidity over time. For this layout I used a line chart and mapped the time-stamp value to the X axis and either temperature or humidy to the Y axis. 
+The dashboard is an HTML file utilizing the CanvasJS API. This dashboard takes the outputted data that is collected in JSON and outputs it to a web browser showing two different graphs. The first graph is temperature over time and the second is humidity over time. For this layout I used a line chart and mapped the time-stamp value to the X axis and either temperature or humidy to the Y axis. Below is an example of the output seen on a web browser.
 
 ![Dashboard Example](https://github.com/blandonkd/blandonkd.github.io/blob/main/DashboardExample.png)
 
